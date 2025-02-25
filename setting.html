@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .settings-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .settings-container h2 {
+            text-align: center;
+        }
+        .settings-container label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .settings-container input[type="text"], .settings-container input[type="number"], 
+        .settings-container input[type="checkbox"], .settings-container select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="settings-container">
+        <h2>Settings</h2>
+        <form id="settings-form">
+            <!-- Username Option -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+
+            <!-- Age Option -->
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="Enter your age" min="0">
+
+            <!-- Notification Preferences -->
+            <label for="notifications">Enable Notifications:</label>
+            <input type="checkbox" id="notifications" name="notifications">
+
+            <!-- Theme Selection -->
+            <label for="theme">Select Theme:</label>
+            <select id="theme" name="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="auto">Auto</option>
+            </select>
+
+            <!-- Save Button -->
+            <button type="submit">Save Settings</button>
+        </form>
+    </div>
+
+    <script>
+        // Example of handling form submission (you can replace with actual functionality)
+        document.getElementById('settings-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the form from submitting
+
+            const username = document.getElementById('username').value;
+            const age = document.getElementById('age').value;
+            const notifications = document.getElementById('notifications').checked;
+            const theme = document.getElementById('theme').value;
+
+            // Output the settings (in a real app, you would save these settings)
+            alert(`Settings Saved!\nUsername: ${username}\nAge: ${age}\nNotifications: ${notifications}\nTheme: ${theme}`);
+        });
+    </script>
+    
+</body>
+</html>

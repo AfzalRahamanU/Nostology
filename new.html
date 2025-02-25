@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Diary</title>
+    <style>
+        body {
+            background-image: url(1.jpg);
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0px;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Sidebar Styling */
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #2c3e50;
+            color: white;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            margin: 20px 0;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            margin-left: 350px;
+            padding: 50px;
+            width: 100%;
+            max-width: 800px;
+            background-color: #f5f5f5;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            margin-top: 40px;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: #6c22b1;
+        }
+
+        .date {
+            font-size: 20px;
+            text-align: right;
+            color: #010101f4;
+            margin-bottom: 10px;
+        }
+
+        .entry-form textarea {
+            width: 98%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+            height: 200px;
+        }
+
+        .entry-form button {
+            padding: 10px 20px;
+            background-color: #16c978;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 30px;
+        }
+
+        .entry-form button:hover {
+            background-color: #4a1a7d;
+        }
+
+        .entries {
+            margin-top: 30px;
+        }
+
+        .entry {
+            background-color: #afa0ab;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .entry .timestamp {
+            font-size: 14px;
+            color: #888;
+            text-align: right;
+            font-style: italic;
+        }
+
+        .entry button {
+            background-color: #ff3b30;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .entry button:hover {
+            background-color: #cc2b2b;
+        }
+
+        .edit-entry button {
+            background-color: #4a90e2;
+        }
+
+        .edit-entry button:hover {
+            background-color: #357ab7;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="index.html">Home</a>
+        <a href="new.html">My Diary</a>
+        <a href="setting.html">Settings</a>
+        <a href="about us.html">About</a>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="header">
+            My Interactive Diary
+        </div>
+
+        <div class="date" id="current-date"></div>
+
+        <!-- Entry Form -->
+        <div class="entry-form">
+            <textarea id="entry-text" placeholder="Write your diary entry here..."></textarea>
+            <button onclick="saveEntry()">Save Entry</button>
+        </div>
+
+        <!-- List of Entries -->
+        <div class="entries" id="entries-list"></div>
+    </div>
+
+    <script>
+        // Display current date in the top right corner
+        function displayDate() {
+            const dateElement = document.getElementById('current-date');
+            const currentDate = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = currentDate.toLocaleDateString('en-US', options);
+            dateElement.textContent = formattedDate;
+        }
+
+        // Load saved entries from localStorage
+        function loadEntries() {
+            const entries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+            const entriesList = document.getElementById('entries-list');
+            entriesList.innerHTML = ''; // Clear current list
+
+            entries.forEach((entry, index) => {
+                const entryDiv = document.createElement('div');
+                entryDiv.classList.add('entry');
+                const timestamp = new Date(entry.timestamp).toLocaleString();
+                entryDiv.innerHTML = `
+                    <p>${entry.text}</p>
+                    <p class="timestamp">${timestamp}</p>
+                    <div class="edit-entry">
+                        <button onclick="editEntry(${index})">Edit</button>
+                        <button onclick="deleteEntry(${index})">Delete</button>
+                    </div>
+                `;
+                entriesList.appendChild(entryDiv);
+            });
+        }
+
+        // Save the new diary entry
+        function saveEntry() {
+            const entryText = document.getElementById('entry-text').value.trim();
+
+            if (entryText) {
+                const entries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+                const newEntry = {
+                    text: entryText,
+                    timestamp: new Date().toISOString()
+                };
+                entries.push(newEntry);
+                localStorage.setItem('diaryEntries', JSON.stringify(entries));
+
+                document.getElementById('entry-text').value = ''; // Clear input field
+                loadEntries(); // Reload entries
+            } else {
+                alert('Please write something before saving!');
+            }
+        }
+
+        // Edit an existing diary entry
+        function editEntry(index) {
+            const entries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+            const entry = entries[index];
+
+            document.getElementById('entry-text').value = entry.text;
+
+            // Remove the entry and re-save the list after edit
+            deleteEntry(index);
+
+            // Scroll to the entry form
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Delete an existing diary entry
+        function deleteEntry(index) {
+            const entries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+            entries.splice(index, 1);
+            localStorage.setItem('diaryEntries', JSON.stringify(entries));
+            loadEntries(); // Reload entries after deletion
+        }
+
+        // Initialize the page
+        window.onload = function() {
+            displayDate();
+            loadEntries();
+        };
+    </script>
+</body>
+</html>

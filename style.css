@@ -1,0 +1,210 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+.main{
+    width: 100%;
+    background-image: url(1.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 109vh;
+}
+.navbar{
+    width: 1200px;
+    height: 75px;
+    margin: auto;
+}
+.icon{
+    width: 200px;
+    float: left;
+    height: 70px;
+}
+.logo{
+    color: aliceblue;
+    font-size: 30px;
+    font-family: Arial;
+    padding-left: 20px;
+    padding-top: 10px;
+    float: left;
+
+}
+.menu{
+    width: 400px;
+    float: left;
+    height: 70px;
+}
+ul{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul li{
+    list-style: none;
+    margin-left: 62px;
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+
+
+
+ul li a{
+    text-decoration: none;
+    color: aliceblue;
+    font-family: Arial;
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+}
+
+ul li a:hover{
+    color: blue;
+}
+
+.search{
+    width: 330px;
+    float: left;
+    margin-left: 270px;
+}
+
+.srch{
+    font-family: 'Times New Roman';
+    width: 200px;
+    height: 15px;
+    background: transparent;
+    border: 1px solid wheat;
+    margin-top: 13px;
+    color: aliceblue;
+    border-right: none;
+    font-size: 16px;
+    float: left;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.btn{
+    width: 100px;
+    height: 40px;
+    background: white;
+    border: 2px solid blue;
+    margin-top: 13px;
+    color: black;
+    font-size: 15px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.content{
+    width: 1200;
+    height: auto;
+    margin: auto;
+    color: white;
+    position: relative; 
+
+}
+
+
+.btn:focus{
+    outline: none;
+
+}
+
+.srch:focus{
+    outline: none;
+}
+
+.content .par{
+    padding-left: 0%;
+    padding-bottom: 35px;
+    font-family: Arial;
+    letter-spacing: 1px;
+    line-height: 25px;
+    margin-top: 15px;
+
+}
+
+.content h1{
+ font-family:'Times New Roman';
+ font-size: 50px;
+ padding-left: 0%;
+ margin-top: 12%;
+ letter-spacing: 1.5px;
+}
+
+.content .cn{
+    width: 160px;
+    height: 50px;
+    background-color: rgb(150, 206, 39);
+    border: none;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    font-size: 20px;border-radius: 10px;
+    cursor: pointer;
+
+}
+
+.content .cn a{
+    text-decoration: none;
+    color: black;
+    transition: 3s ease;
+}
+
+
+.cn:hover{
+    background-color: aliceblue;
+}
+
+.content span{
+    color: blue;
+    font-size: 60px;
+}
+
+
+.img{
+    position: absolute;
+    top: 23%;
+    left: 65%;
+    cursor: pointer;
+    transition: transform 10s ease-in-out;
+    
+}
+
+/* Basic styling for the image */
+#img {
+    width: 200px;  /* Initial size */
+     /* Smooth transition for the changes */
+    cursor: pointer;  /* Change cursor to indicate clickability */
+    position: absolute;  /* Position the image relative to the viewport */
+    top: 0;  /* Align it to the top of the screen */
+    right: 0;  /* Align it to the right side of the screen */
+    margin-top: 200px;  /* Optional margin to give some space from the edges */
+    margin-right: 50px;
+    width: 500px;
+    height: 300px;
+}
+
+
+/* Styling for the centered and enlarged image */
+.centered {
+    position: fixed;  /* Position it fixed on the screen */
+    top: 50%;         /* Center vertically */
+    left: 50%;        /* Center horizontally */
+    transform: translate(-50%, -50%);  /* Adjust for perfect centering */
+    width: 80%;       /* Resize to a larger size */
+    z-index: 1000;    /* Make sure it's above other content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  /* Optional shadow for effect */
+}
+
+/* Optional: to prevent the image from stretching */
+.centered img {
+ 
+margin-top: 400px;
+    max-width: 100%; /* Ensures the image doesn't overflow */
+    max-height: 100vh; /* Limits the image size to the viewport */
+}
+
+
+
